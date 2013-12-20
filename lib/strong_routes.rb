@@ -1,4 +1,5 @@
 require 'rack/request'
+
 require 'strong_routes/allow'
 require 'strong_routes/config'
 require 'strong_routes/route_matcher'
@@ -12,3 +13,5 @@ module StrongRoutes
   # Initialize the config
   config
 end
+
+require 'strong_routes/rails/railtie' if defined?(Rails)
