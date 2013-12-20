@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Adam Hutchison"]
   spec.email         = ["liveh2o@gmail.com"]
   spec.summary       = %q{Middleware to reject/allow requests before allocating a database connection}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.description   = spec.summary
   spec.homepage      = ""
   spec.license       = "MIT"
 
@@ -20,6 +20,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rack"
 
-  spec.add_development_dependency "bundler", "~> 1.5"
+  spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"
 end
