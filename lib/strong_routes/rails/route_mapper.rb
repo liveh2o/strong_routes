@@ -14,25 +14,31 @@ module StrongRoutes
         @route_set = route_set
       end
 
+      # Map the route set to a collection of the top level segments.
       def map
-        matches.map { |match_data| match_data[:path] }
+        map = matches.map { |match_data| match_data[:path] }
+        map.compact!
+        map.uniq!
       end
 
+    private
+
+      # All we need for the allowed routes is the first segment (i.e. 'users'
+      # from '/users/:user_id/posts(/:format)'). Convert the path strings into
+      # match data objects.
       def matches
-        matches = paths.map { |path| path.match(/\A\/(?<path>\w+)\/*.*\Z/) }
+        matches = paths.map { |path| path.match(/\A\/(?<path>[\w-]+)\/*.*\Z/) }
         matches.compact!
         matches.uniq!
         matches
       end
 
+      # Extract the route paths from the route objects so we have a simple
+      # string to interact with.
       def paths
-        paths = routes.map { |route| ::ActionDispatch::Routing::RouteWrapper.new(route).path }
+        paths = route_set.routes.map { |route| ::ActionDispatch::Routing::RouteWrapper.new(route).path }
         paths.uniq!
         paths
-      end
-
-      def routes
-        route_set.routes
       end
     end
   end

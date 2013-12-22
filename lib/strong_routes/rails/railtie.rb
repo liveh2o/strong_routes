@@ -1,3 +1,5 @@
+require 'strong_routes/rails/route_mapper'
+
 module StrongRoutes
   module Rails
     class Railtie < ::Rails::Railtie
