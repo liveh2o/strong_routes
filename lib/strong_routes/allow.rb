@@ -31,10 +31,6 @@ module StrongRoutes
       end
     end
 
-    def allowed_routes?
-      @options[:allowed_routes]
-    end
-
     def allowed?(request)
       route_matchers.any? { |route_matcher| route_matcher =~ request.path_info }
     end
