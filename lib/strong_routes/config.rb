@@ -25,7 +25,7 @@ module StrongRoutes
           end
 
           def #{name}?
-            self[:#{name}].nil?
+            !! self[:#{name}]
           end
         METHOD
       end
