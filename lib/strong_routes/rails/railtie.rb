@@ -6,8 +6,8 @@ module StrongRoutes
       config.strong_routes = ::StrongRoutes.config
 
       initializer 'strong_routes.initialize' do |app|
-        config.allowed_routes ||= []
-        config.allowed_routes += ::StrongRoutes::Rails::RouteMapper.map(app.routes)
+        config.strong_routes.allowed_routes ||= []
+        config.strong_routes.allowed_routes += ::StrongRoutes::Rails::RouteMapper.map(app.routes)
 
         case
         when config.strong_routes.insert_before? then
