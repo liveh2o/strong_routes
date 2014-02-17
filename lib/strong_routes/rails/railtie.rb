@@ -3,19 +3,23 @@ require 'strong_routes/rails/route_mapper'
 module StrongRoutes
   module Rails
     class Railtie < ::Rails::Railtie
-      config.strong_routes = ::StrongRoutes.config
+      config.strong_routes = StrongRoutes.config
 
       initializer 'strong_routes.initialize' do |app|
+        # Need to force Rails to load the routes since there's no way to hook
+        # in after routes are loaded
+        app.reload_routes!
+
         config.strong_routes.allowed_routes ||= []
-        config.strong_routes.allowed_routes += ::StrongRoutes::Rails::RouteMapper.map(app.routes)
+        config.strong_routes.allowed_routes += RouteMapper.map(app.routes)
 
         case
         when config.strong_routes.insert_before? then
-          app.config.middleware.insert_before(config.strong_routes.insert_before, ::StrongRoutes::Allow)
+          app.config.middleware.insert_before(config.strong_routes.insert_before, Allow)
         when config.strong_routes.insert_after? then
-          app.config.middleware.insert_after(config.strong_routes.insert_after, ::StrongRoutes::Allow)
+          app.config.middleware.insert_after(config.strong_routes.insert_after, Allow)
         else
-          app.config.middleware.insert_before(::Rails::Rack::Logger, ::StrongRoutes::Allow)
+          app.config.middleware.insert_before(::Rails::Rack::Logger, Allow)
         end
       end
     end
