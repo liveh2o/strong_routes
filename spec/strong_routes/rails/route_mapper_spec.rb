@@ -4,15 +4,16 @@ require 'action_dispatch'
 require 'strong_routes/rails/route_mapper'
 
 describe ::StrongRoutes::Rails::RouteMapper do
-  let(:paths) { [ 'users', 'posts', 'user_posts', 'bar', 'trading-post' ] }
+  let(:paths) { [ 'users', 'posts', 'comments', 'user_posts', 'bar', 'trading-post' ] }
   let(:route_set) {
     route_set = ActionDispatch::Routing::RouteSet.new
     route_set.draw do
       resources :users, :only => :index  do
-        resources :posts
+        resources :posts, :shallow => true do
+          resources :comments, :shallow => true
+        end
       end
 
-      resources :posts, :only => :show
       resources :user_posts, :only => :show
 
       get 'bar/sandwich', :to => 'users#index'
@@ -23,7 +24,7 @@ describe ::StrongRoutes::Rails::RouteMapper do
 
   describe ".map" do
     it "maps routes to path strings" do
-      ::StrongRoutes::Rails::RouteMapper.map(route_set).must_equal paths
+      ::StrongRoutes::Rails::RouteMapper.map(route_set).sort.must_equal paths.sort
     end
   end
 
@@ -31,7 +32,7 @@ describe ::StrongRoutes::Rails::RouteMapper do
     subject { ::StrongRoutes::Rails::RouteMapper.new(route_set) }
 
     it "maps routes to path strings" do
-      subject.map.must_equal paths
+      subject.map.sort.must_equal paths.sort
     end
   end
 end
