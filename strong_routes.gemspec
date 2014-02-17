@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = StrongRoutes::VERSION
   spec.authors       = ["Adam Hutchison"]
   spec.email         = ["liveh2o@gmail.com"]
-  spec.summary       = %q{Middleware to reject/allow requests before allocating a database connection}
+  spec.summary       = %q{Middleware to reject/allow requests before allocating a database connection or any resources}
   spec.description   = spec.summary
   spec.homepage      = ""
   spec.license       = "MIT"
