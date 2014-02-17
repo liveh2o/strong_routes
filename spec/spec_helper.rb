@@ -1,6 +1,13 @@
 require 'rubygems'
-require 'bundler'
 
+# Start SimpleCov
+require 'simplecov'
+SimpleCov.start do
+  add_filter "/spec"
+end
+
+# Load gems with Bundler
+require 'bundler'
 ::Bundler.require(:default, :development, :test)
 
 require 'minitest/spec'
