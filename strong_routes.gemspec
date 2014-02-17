@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["liveh2o@gmail.com"]
   spec.summary       = %q{Middleware to reject/allow requests before allocating a database connection or any resources}
   spec.description   = spec.summary
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/liveh2o/strong_routes"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
