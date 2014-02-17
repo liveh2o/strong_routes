@@ -6,13 +6,6 @@ module StrongRoutes
       config.strong_routes = StrongRoutes.config
 
       initializer 'strong_routes.initialize' do |app|
-        # Need to force Rails to load the routes since there's no way to hook
-        # in after routes are loaded
-        app.reload_routes!
-
-        config.strong_routes.allowed_routes ||= []
-        config.strong_routes.allowed_routes += RouteMapper.map(app.routes)
-
         case
         when config.strong_routes.insert_before? then
           app.config.middleware.insert_before(config.strong_routes.insert_before, Allow)
@@ -21,6 +14,17 @@ module StrongRoutes
         else
           app.config.middleware.insert_before(::Rails::Rack::Logger, Allow)
         end
+      end
+
+      # Load this late so initializers that depend on routes have a chance to
+      # initialize (i.e. Devise)
+      config.after_initialize do |app|
+        # Need to force Rails to load the routes since there's no way to hook
+        # in after routes are loaded
+        app.reload_routes!
+
+        config.strong_routes.allowed_routes ||= []
+        config.strong_routes.allowed_routes += RouteMapper.map(app.routes)
       end
     end
   end
