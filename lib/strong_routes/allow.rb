@@ -1,7 +1,5 @@
 module StrongRoutes
   class Allow
-    MESSAGE = "Resource Not Found".freeze
-
     def initialize(app, options = {})
       @app = app
       @options = ::StrongRoutes.config.merge(options)
@@ -15,7 +13,7 @@ module StrongRoutes
       if allowed?(request)
         @app.call(env)
       else
-        [ 404, { "Content-Type" => "text/html", "Content-Length" => "18" }, [ MESSAGE ] ]
+        [ 404, { "Content-Type" => "text/html", "Content-Length" => @options.message.length }, [ @options.message ] ]
       end
     end
 

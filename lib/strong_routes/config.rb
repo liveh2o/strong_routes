@@ -38,12 +38,14 @@ module StrongRoutes
     hash_accessor :allowed_routes,
                   :enabled,
                   :insert_after,
-                  :insert_before
+                  :insert_before,
+                  :message
 
     def initialize(*)
       super
 
       self[:enabled] = true if self[:enabled].nil?
+      self[:message] = "Resource Not Found" if self[:message].nil?
     end
   end
 end
