@@ -13,7 +13,7 @@ module StrongRoutes
       if allowed?(request)
         @app.call(env)
       else
-        [ 404, { "Content-Type" => "text/html", "Content-Length" => config.message.length }, [ config.message ] ]
+        [ 404, { "Content-Type" => "text/html", "Content-Length" => config.message.length.to_s }, [ config.message ] ]
       end
     end
 
