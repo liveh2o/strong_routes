@@ -19,6 +19,7 @@ module StrongRoutes
         map = matches.map { |match_data| match_data[:path] }
         map.compact!
         map.uniq!
+        map
       end
 
     private
