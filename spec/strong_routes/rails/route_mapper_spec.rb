@@ -4,7 +4,22 @@ require 'action_dispatch'
 require 'strong_routes/rails/route_mapper'
 
 describe ::StrongRoutes::Rails::RouteMapper do
-  let(:paths) { [ 'users', 'posts', 'comments', 'user_posts', 'bar', 'trading-post' ] }
+  let(:paths) {
+    [
+      'bar/sandwich',
+      'comments/:id',
+      'comments/:id/edit',
+      'posts/:id',
+      'posts/:id/edit',
+      'posts/:post_id/comments',
+      'posts/:post_id/comments/new',
+      'trading-post',
+      'user_posts/:id',
+      'users',
+      'users/:user_id/posts',
+      'users/:user_id/posts/new'
+    ]
+  }
   let(:route_set) {
     route_set = ActionDispatch::Routing::RouteSet.new
     route_set.draw do

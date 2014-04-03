@@ -12,7 +12,7 @@ describe ::StrongRoutes::RouteMatcher do
       end
     end
 
-    context "when not given a symbol" do
+    context "when given a symbol" do
       let(:matcher) { /\A\/foo/i }
 
       subject { ::StrongRoutes::RouteMatcher.new(:foo) }
@@ -22,10 +22,20 @@ describe ::StrongRoutes::RouteMatcher do
       end
     end
 
-    context "when not given a string" do
+    context "when given a string" do
       let(:matcher) { /\A\/foo/i }
 
       subject { ::StrongRoutes::RouteMatcher.new('foo') }
+
+      it "creates a new matcher" do
+        subject.must_equal matcher
+      end
+    end
+
+    context "when given a string with dynamic segments" do
+      let(:matcher) { /\A\/.*\/foo\/.*\/bar/i }
+
+      subject { ::StrongRoutes::RouteMatcher.new(':id/foo/:foo_id/bar') }
 
       it "creates a new matcher" do
         subject.must_equal matcher
