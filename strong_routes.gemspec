@@ -19,8 +19,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "rack"
+  spec.add_dependency "actionpack", ">= 3.2.0"
 
-  spec.add_development_dependency "actionpack"
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "pry-nav"
   spec.add_development_dependency "rake"
