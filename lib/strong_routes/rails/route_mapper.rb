@@ -1,4 +1,4 @@
-require 'action_dispatch/routing/inspector'
+require 'active_support/core_ext/hash/reverse_merge'
 
 module StrongRoutes
   module Rails
@@ -36,7 +36,7 @@ module StrongRoutes
       # Extract the route paths from the route objects so we have a simple
       # string to interact with.
       def paths
-        paths = route_set.routes.map { |route| ::ActionDispatch::Routing::RouteWrapper.new(route).path }
+        paths = route_set.routes.map { |route| route.path.spec.to_s }
         paths.uniq!
         paths
       end

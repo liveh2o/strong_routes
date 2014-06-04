@@ -10,13 +10,13 @@ end
 require 'bundler'
 ::Bundler.require(:default, :development, :test)
 
-require 'minitest/spec'
 require 'minitest/autorun'
+require 'minitest/spec'
 require 'minitest/pride'
 
 include ::Rack::Test::Methods
 
-class MiniTest::Spec < MiniTest::Unit::TestCase
+class MiniTest::Spec
   class << self
     alias_method :setup, :before
     alias_method :teardown, :after
