@@ -5,8 +5,9 @@ module StrongRoutes
         super(route)
       else
         route = map_dynamic_segments(route)
+        route = "/#{route}" unless route =~ /\A\//
         escaped_route = Regexp.escape(route)
-        super(/\A\/#{route}/i)
+        super(/\A#{route}/i)
       end
     end
 
@@ -16,16 +17,7 @@ module StrongRoutes
     # becomes /.*/users/.*)
     #
     def map_dynamic_segments(route)
-      segments = route.to_s.split('/')
-      segments.map! do |segment|
-        if segment =~ /:/
-          '.*'
-        else
-          segment
-        end
-      end
-
-      segments.join('/')
+      route.to_s.gsub(/:\w+/, '.*')
     end
   end
 end

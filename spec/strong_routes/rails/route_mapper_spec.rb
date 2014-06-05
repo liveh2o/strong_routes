@@ -6,18 +6,19 @@ require 'strong_routes/rails/route_mapper'
 describe ::StrongRoutes::Rails::RouteMapper do
   let(:paths) {
     [
-      'bar/sandwich',
-      'comments/:id',
-      'comments/:id/edit',
-      'posts/:id',
-      'posts/:id/edit',
-      'posts/:post_id/comments',
-      'posts/:post_id/comments/new',
-      'trading-post',
-      'user_posts/:id',
-      'users',
-      'users/:user_id/posts',
-      'users/:user_id/posts/new'
+      '/',
+      '/bar/sandwich',
+      '/comments/:id',
+      '/comments/:id/edit',
+      '/posts/:id',
+      '/posts/:id/edit',
+      '/posts/:post_id/comments',
+      '/posts/:post_id/comments/new',
+      '/trading-post',
+      '/user_posts/:id',
+      '/users',
+      '/users/:user_id/posts',
+      '/users/:user_id/posts/new',
     ]
   }
   let(:route_set) {
@@ -33,6 +34,8 @@ describe ::StrongRoutes::Rails::RouteMapper do
 
       get 'bar/sandwich', :to => 'users#index'
       get 'trading-post', :to => 'posts#show'
+
+      root :to => 'posts#index'
     end
     route_set
   }

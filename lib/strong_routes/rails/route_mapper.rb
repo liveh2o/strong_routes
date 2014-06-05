@@ -27,7 +27,7 @@ module StrongRoutes
       # Convert the path strings into match data objects, capturing all segments
       # except optional ones (e.g. :format).
       def matches
-        matches = paths.map { |path| path.match(/\A\/(?<path>[-:\w\/]+)\/*.*\Z/) }
+        matches = paths.map { |path| path.match(/\A(?<path>[-:\w\/]+)\/*.*\Z/) }
         matches.compact!
         matches.uniq!
         matches
