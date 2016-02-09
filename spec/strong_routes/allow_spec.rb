@@ -5,8 +5,8 @@ def middleware
 end
 
 describe ::StrongRoutes::Allow do
-  let(:app) { middleware.new(env) }
-  let(:env) { lambda { |env| [ 200, { "Content-Type" => "text/plain" }, [ "Good" ] ] } }
+  let(:app) { middleware.new(stack) }
+  let(:stack) { lambda { |env| [ 200, { "Content-Type" => "text/plain" }, [ "Good" ] ] } }
 
   context "without allowed routes set" do
     it "does not allow access to /users" do
@@ -63,7 +63,7 @@ describe ::StrongRoutes::Allow do
   end
 
   context "enabled option is false" do
-    let(:app) { middleware.new(env, { :enabled => false }) }
+    let(:app) { middleware.new(stack, { :enabled => false }) }
 
     it "passes request to the next app" do
       get "/users/profile/anything?stuff=12"
@@ -72,7 +72,7 @@ describe ::StrongRoutes::Allow do
   end
 
   context "allowed_routes passed to initializer" do
-    let(:app) { middleware.new(env, { :allowed_routes => [ :users ] }) }
+    let(:app) { middleware.new(stack, { :allowed_routes => [ :users ] }) }
 
     it "allows /users with :users" do
       get "/users"

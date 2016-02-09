@@ -5,7 +5,7 @@ module StrongRoutes
       @options = options
     end
 
-    def call(env)
+    def _call(env)
       return @app.call(env) unless enabled?
 
       request = ::Rack::Request.new(env)
@@ -15,6 +15,12 @@ module StrongRoutes
       else
         [ 404, { "Content-Type" => "text/html", "Content-Length" => config.message.length.to_s }, [ config.message ] ]
       end
+    end
+
+    # HACK: This makes this middleware threadsafe, but is not a very good pattern.
+    # We should rewrite this to use a separate class with instance-level stuff.
+    def call(env)
+      dup._call(env)
     end
 
   private
