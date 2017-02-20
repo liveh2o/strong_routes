@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/liveh2o/strong_routes.svg?branch=master)](https://travis-ci.org/liveh2o/strong_routes)
+
 # Strong Routes
 
 Strong Routes is a simple Rack middleware to reject requests to unknown routes before allocating connections or any resources.
