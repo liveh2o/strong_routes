@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rack"
 
-  spec.add_development_dependency "actionpack", ">= 3.2.0"
+  spec.add_development_dependency "actionpack", "< 5.0.0", ">= 3.2.0"
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "pry-nav"
   spec.add_development_dependency "rack-test"
