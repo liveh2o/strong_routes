@@ -1,4 +1,4 @@
-require "spec_helper"
+require "test_helper"
 
 describe ::StrongRoutes::RouteMatcher do
   describe "initialize" do
@@ -8,7 +8,7 @@ describe ::StrongRoutes::RouteMatcher do
       subject { ::StrongRoutes::RouteMatcher.new(matcher) }
 
       it "uses the regex as the matcher" do
-        subject.must_equal matcher
+        _(subject).must_equal matcher
       end
     end
 
@@ -18,7 +18,7 @@ describe ::StrongRoutes::RouteMatcher do
       subject { ::StrongRoutes::RouteMatcher.new(:foo) }
 
       it "creates a new matcher" do
-        subject.must_equal matcher
+        _(subject).must_equal matcher
       end
     end
 
@@ -28,7 +28,7 @@ describe ::StrongRoutes::RouteMatcher do
       subject { ::StrongRoutes::RouteMatcher.new("foo") }
 
       it "creates a new matcher" do
-        subject.must_equal matcher
+        _(subject).must_equal matcher
       end
     end
 
@@ -38,7 +38,7 @@ describe ::StrongRoutes::RouteMatcher do
       subject { ::StrongRoutes::RouteMatcher.new(":id/foo/:foo_id/bar") }
 
       it "creates a new matcher" do
-        subject.must_equal matcher
+        _(subject).must_equal matcher
       end
     end
   end

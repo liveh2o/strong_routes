@@ -1,9 +1,7 @@
-require "rubygems"
-
 # Start SimpleCov
 require "simplecov"
 SimpleCov.start do
-  add_filter "/spec"
+  add_filter "/test"
 end
 
 # Load gems with Bundler
@@ -14,7 +12,7 @@ require "minitest/autorun"
 require "minitest/spec"
 require "minitest/pride"
 
-class MiniTest::Spec
+class Minitest::Spec
   class << self
     alias_method :setup, :before
     alias_method :teardown, :after
