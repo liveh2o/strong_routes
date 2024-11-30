@@ -1,4 +1,6 @@
-[![Build Status](https://travis-ci.org/liveh2o/strong_routes.svg?branch=master)](https://travis-ci.org/liveh2o/strong_routes)
+[![Build](https://github.com/liveh2o/strong_routes/actions/workflows/main.yml/badge.svg)](https://github.com/liveh2o/strong_routes/actions)
+[![Ruby Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/standardrb/standard)
+[![Gem Version](https://badge.fury.io/rb/strong_routes.svg)](https://badge.fury.io/rb/strong_routes)
 
 # Strong Routes
 

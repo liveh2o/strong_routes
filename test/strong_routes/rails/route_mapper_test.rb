@@ -5,7 +5,7 @@ require "active_support"
 require "active_support/core_ext"
 require "strong_routes/rails/route_mapper"
 
-describe ::StrongRoutes::Rails::RouteMapper do
+describe StrongRoutes::Rails::RouteMapper do
   let(:paths) {
     [
       "/",
@@ -44,12 +44,12 @@ describe ::StrongRoutes::Rails::RouteMapper do
 
   describe ".map" do
     it "maps routes to path strings" do
-      _(::StrongRoutes::Rails::RouteMapper.map(route_set).sort).must_equal paths.sort
+      _(StrongRoutes::Rails::RouteMapper.map(route_set).sort).must_equal paths.sort
     end
   end
 
   describe "#map" do
-    subject { ::StrongRoutes::Rails::RouteMapper.new(route_set) }
+    subject { StrongRoutes::Rails::RouteMapper.new(route_set) }
 
     it "maps routes to path strings" do
       _(subject.map.sort).must_equal paths.sort

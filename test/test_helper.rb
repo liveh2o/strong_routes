@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 # Start SimpleCov
 require "simplecov"
 SimpleCov.start do
   add_filter "/test"
 end
 
-# Load gems with Bundler
-require "bundler"
-Bundler.require(:default, :development, :test)
+$LOAD_PATH.unshift File.expand_path("../lib", __dir__)
+require "strong_routes"
 
 require "minitest/autorun"
-require "minitest/spec"
 require "minitest/pride"
+require "minitest/spec"
+require "rack/test"
 
 class Minitest::Spec
   class << self

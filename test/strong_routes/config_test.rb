@@ -1,7 +1,7 @@
 require "test_helper"
 
-describe ::StrongRoutes::Config do
-  subject { ::StrongRoutes::Config.new }
+describe StrongRoutes::Config do
+  subject { StrongRoutes::Config.new }
 
   describe "API" do
     it "supports :allowed_routes" do
