@@ -7,5 +7,7 @@ Rake::TestTask.new do |t|
   t.verbose = false
 end
 
-task :default => :test
-task :spec => :test
+require "standard/rake"
+
+task default: %i[test standard:fix]
+task spec: :test

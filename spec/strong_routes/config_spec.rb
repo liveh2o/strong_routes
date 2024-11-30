@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe ::StrongRoutes::Config do
   subject { ::StrongRoutes::Config.new }

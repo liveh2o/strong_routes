@@ -13,7 +13,7 @@ module StrongRoutes
     #   config[:app] = Bar
     #   config.app #=> Bar
     #
-    def hash_accessor(*names) #:nodoc:
+    def hash_accessor(*names) # :nodoc:
       names.each do |name|
         class_eval <<-METHOD, __FILE__, __LINE__ + 1
           def #{name}
@@ -36,10 +36,10 @@ module StrongRoutes
     extend Accessorable
 
     hash_accessor :allowed_routes,
-                  :enabled,
-                  :insert_after,
-                  :insert_before,
-                  :message
+      :enabled,
+      :insert_after,
+      :insert_before,
+      :message
 
     def initialize(*)
       super

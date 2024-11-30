@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe ::StrongRoutes::RouteMatcher do
   describe "initialize" do
@@ -25,7 +25,7 @@ describe ::StrongRoutes::RouteMatcher do
     context "when given a string" do
       let(:matcher) { /\A\/foo/i }
 
-      subject { ::StrongRoutes::RouteMatcher.new('foo') }
+      subject { ::StrongRoutes::RouteMatcher.new("foo") }
 
       it "creates a new matcher" do
         subject.must_equal matcher
@@ -35,7 +35,7 @@ describe ::StrongRoutes::RouteMatcher do
     context "when given a string with dynamic segments" do
       let(:matcher) { /\A\/.*\/foo\/.*\/bar/i }
 
-      subject { ::StrongRoutes::RouteMatcher.new(':id/foo/:foo_id/bar') }
+      subject { ::StrongRoutes::RouteMatcher.new(":id/foo/:foo_id/bar") }
 
       it "creates a new matcher" do
         subject.must_equal matcher

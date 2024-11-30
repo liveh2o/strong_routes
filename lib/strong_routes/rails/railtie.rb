@@ -1,15 +1,16 @@
-require 'strong_routes/rails/route_mapper'
+require "strong_routes/rails/route_mapper"
 
 module StrongRoutes
   module Rails
     class Railtie < ::Rails::Railtie
       config.strong_routes = StrongRoutes.config
 
-      initializer 'strong_routes.initialize' do |app|
-        case
-        when config.strong_routes.insert_before? then
+      initializer "strong_routes.initialize" do |app|
+        if config.strong_routes.insert_before?
+
           app.config.middleware.insert_before(config.strong_routes.insert_before, Allow)
-        when config.strong_routes.insert_after? then
+        elsif config.strong_routes.insert_after?
+
           app.config.middleware.insert_after(config.strong_routes.insert_after, Allow)
         else
           app.config.middleware.insert_before(::Rails::Rack::Logger, Allow)

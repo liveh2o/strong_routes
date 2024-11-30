@@ -1,20 +1,18 @@
-require 'rubygems'
+require "rubygems"
 
 # Start SimpleCov
-require 'simplecov'
+require "simplecov"
 SimpleCov.start do
   add_filter "/spec"
 end
 
 # Load gems with Bundler
-require 'bundler'
-::Bundler.require(:default, :development, :test)
+require "bundler"
+Bundler.require(:default, :development, :test)
 
-require 'minitest/autorun'
-require 'minitest/spec'
-require 'minitest/pride'
-
-include ::Rack::Test::Methods
+require "minitest/autorun"
+require "minitest/spec"
+require "minitest/pride"
 
 class MiniTest::Spec
   class << self

@@ -2,11 +2,11 @@ module StrongRoutes
   class RouteMatcher < Regexp
     def initialize(route)
       if route.is_a?(Regexp)
-        super(route)
+        super
       else
         route = map_dynamic_segments(route)
-        route = "/#{route}" unless route =~ /\A\//
-        escaped_route = Regexp.escape(route)
+        route = "/#{route}" unless route.start_with?("/")
+        Regexp.escape(route)
         super(/\A#{route}/i)
       end
     end
@@ -17,7 +17,7 @@ module StrongRoutes
     # becomes /.*/users/.*)
     #
     def map_dynamic_segments(route)
-      route.to_s.gsub(/:\w+/, '.*')
+      route.to_s.gsub(/:\w+/, ".*")
     end
   end
 end

@@ -1,12 +1,14 @@
-require 'spec_helper'
+require "spec_helper"
 
 def middleware
   ::StrongRoutes::Allow
 end
 
 describe ::StrongRoutes::Allow do
+  include ::Rack::Test::Methods
+
   let(:app) { middleware.new(stack) }
-  let(:stack) { lambda { |env| [ 200, { "Content-Type" => "text/plain" }, [ "Good" ] ] } }
+  let(:stack) { lambda { |env| [200, {"Content-Type" => "text/plain"}, ["Good"]] } }
 
   context "without allowed routes set" do
     it "does not allow access to /users" do
@@ -36,7 +38,7 @@ describe ::StrongRoutes::Allow do
   end
 
   context "with allowed routes set" do
-    let(:users_path) { [ /\/users/i ] }
+    let(:users_path) { [/\/users/i] }
 
     before do
       ::StrongRoutes.config.allowed_routes = users_path
@@ -63,7 +65,7 @@ describe ::StrongRoutes::Allow do
   end
 
   context "enabled option is false" do
-    let(:app) { middleware.new(stack, { :enabled => false }) }
+    let(:app) { middleware.new(stack, {enabled: false}) }
 
     it "passes request to the next app" do
       get "/users/profile/anything?stuff=12"
@@ -72,7 +74,7 @@ describe ::StrongRoutes::Allow do
   end
 
   context "allowed_routes passed to initializer" do
-    let(:app) { middleware.new(stack, { :allowed_routes => [ :users ] }) }
+    let(:app) { middleware.new(stack, {allowed_routes: [:users]}) }
 
     it "allows /users with :users" do
       get "/users"
