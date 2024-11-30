@@ -1,4 +1,4 @@
-require 'active_support/core_ext/hash/reverse_merge'
+require "active_support/core_ext/hash/reverse_merge"
 
 module StrongRoutes
   module Rails
@@ -6,7 +6,7 @@ module StrongRoutes
       attr_reader :route_set
 
       def self.map(route_set)
-        route_mapper = self.new(route_set)
+        route_mapper = new(route_set)
         route_mapper.map
       end
 
@@ -22,7 +22,7 @@ module StrongRoutes
         map
       end
 
-    private
+      private
 
       # Convert the path strings into match data objects, capturing all segments
       # except optional ones (e.g. :format).

@@ -13,7 +13,7 @@ module StrongRoutes
       if allowed?(request)
         @app.call(env)
       else
-        [ 404, { "Content-Type" => "text/html", "Content-Length" => config.message.length.to_s }, [ config.message ] ]
+        [404, {"Content-Type" => "text/html", "Content-Length" => config.message.length.to_s}, [config.message]]
       end
     end
 
@@ -23,11 +23,11 @@ module StrongRoutes
       dup._call(env)
     end
 
-  private
+    private
 
     def allowed_routes
       @allowed_routes ||= begin
-        routes = [ config.allowed_routes ]
+        routes = [config.allowed_routes]
         routes.flatten!
         routes.compact!
         routes.uniq!

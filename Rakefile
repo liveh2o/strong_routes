@@ -1,11 +1,10 @@
 require "bundler/gem_tasks"
-require "rake/testtask"
+require "minitest/test_task"
 
-Rake::TestTask.new do |t|
-  t.libs.push "spec"
-  t.pattern = "spec/**/*_spec.rb"
-  t.verbose = false
+Minitest::TestTask.create do |t|
+  t.warning = false
 end
 
-task :default => :test
-task :spec => :test
+require "standard/rake"
+
+task default: %i[test standard:fix]
