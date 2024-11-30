@@ -2,6 +2,7 @@
 
 # Start SimpleCov
 require "simplecov"
+SimpleCov.external_at_exit = true
 SimpleCov.start do
   add_filter "/test"
 end

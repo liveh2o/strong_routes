@@ -11,6 +11,6 @@ gem "rack-test", "~> 2.1"
 
 gem "rake", "~> 13.0"
 
-gem "simplecov", "~> 0.22"
+gem "simplecov", "~> 0.22", require: false
 
 gem "standard", "~> 1.3"
