@@ -51,13 +51,14 @@ StrongRoutes.config.allowed_routes = [ /\A\//i, /\A\/posts/i ]
 Any routes that aren't allowed will return a 404 by default:
 
 ```
-[ 404, { "Content-Type" => "text/html", "Content-Length" => "18" }, [ "Resource Not Found" ] ]
+[ 404, {}, [] ]
 ```
 
-The message that is returned can be specified using the `message` config option:
+The content that is returned can be specified using the `content` config option:
 
 ```Ruby
-StrongRoutes.config.message = File.read(Rails.root.join('public/404.html'))
+StrongRoutes.config.content = File.read(Rails.root.join('public/404.html'))
+StrongRoutes.config.content_type = "text/html"
 ```
 
 ## Contributing

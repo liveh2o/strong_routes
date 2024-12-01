@@ -14,8 +14,8 @@ module StrongRoutes
     @config ||= Config.new
   end
 
-  def self.enabled?
-    config.enabled?
+  def self.response
+    Rack::Response[config.status, config.headers, config.content]
   end
 
   # Initialize the config

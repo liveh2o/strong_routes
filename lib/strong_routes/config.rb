@@ -1,16 +1,19 @@
+# frozen_string_literal: true
+
 module StrongRoutes
   class Config
     attr_accessor :enabled,
+      :content,
+      :content_type,
       :insert_after,
-      :insert_before,
-      :message
+      :insert_before
 
     attr_reader :allowed_routes, :route_matchers
+    attr_writer :status
 
     def initialize
       @allowed_routes = Set.new
       @enabled = true
-      @message = "Resource Not Found"
       @route_matchers = []
     end
 
@@ -24,12 +27,24 @@ module StrongRoutes
       !!enabled
     end
 
+    def headers
+      if content.present?
+        {Rack::CONTENT_TYPE => content_type || "text/plain"}
+      else
+        {}
+      end
+    end
+
     def insert_after?
       !!insert_after
     end
 
     def insert_before?
       !!insert_before
+    end
+
+    def status
+      @status ||= 404
     end
   end
 end

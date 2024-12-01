@@ -10,7 +10,7 @@ module StrongRoutes
       if StrongRoutes.allowed?(env[Rack::PATH_INFO].to_s)
         @app.call(env)
       else
-        [404, {"Content-Type" => "text/html", "Content-Length" => config.message.length.to_s}, [config.message]]
+        StrongRoutes.response
       end
     end
 
