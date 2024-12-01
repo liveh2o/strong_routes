@@ -47,6 +47,11 @@ describe StrongRoutes::Allow do
       _(last_response).must_be :ok?
     end
 
+    it "allows access to /users?stuff=12" do
+      get "/users/?stuff=12"
+      _(last_response).must_be :ok?
+    end
+
     it "does not allow access to /user" do
       get "/user"
       _(last_response).wont_be :ok?

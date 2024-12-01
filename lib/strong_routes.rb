@@ -2,7 +2,7 @@ require "rack/response"
 
 require "strong_routes/allow"
 require "strong_routes/config"
-require "strong_routes/route_matcher"
+require "strong_routes/matcher"
 require "strong_routes/route_mapper"
 require "strong_routes/version"
 

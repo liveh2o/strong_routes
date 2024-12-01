@@ -44,7 +44,7 @@ describe StrongRoutes::Config do
   describe "#allowed_routes=" do
     it "maps allowed routes to matchers" do
       subject.allowed_routes = ["/users"]
-      _(subject.route_matchers).must_equal [StrongRoutes::RouteMatcher.new("/users")]
+      _(subject.route_matchers).must_equal [StrongRoutes::Matcher.new("/users")]
     end
   end
 
