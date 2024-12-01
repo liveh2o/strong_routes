@@ -3,6 +3,7 @@ require "rack/response"
 require "strong_routes/allow"
 require "strong_routes/config"
 require "strong_routes/route_matcher"
+require "strong_routes/route_mapper"
 require "strong_routes/version"
 
 module StrongRoutes
@@ -22,4 +23,4 @@ module StrongRoutes
   config
 end
 
-require "strong_routes/rails/railtie" if defined?(Rails)
+require "strong_routes/railtie" if defined?(Rails)
