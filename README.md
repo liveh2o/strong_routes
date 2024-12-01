@@ -24,7 +24,7 @@ Or install it yourself as:
 
 ### Rails Apps
 
-In Rails apps, using strong routes is as simple as adding it to your Gemfile. The middleware is automatically added to the middleware stack. Any routes defined by the application are automatically allowed by default.
+In Rails apps, using Strong Routes is as simple as adding it to your Gemfile. The middleware is automatically added to the middleware stack. Any routes defined by the application are automatically allowed by default.
 
 ### Rack Apps
 
@@ -48,7 +48,7 @@ StrongRoutes.config.allowed_routes = [ /\A\//i, /\A\/posts/i ]
 
 ### Response
 
-Any routes that aren't allowed will return a 404 by default:
+Any routes that aren't allowed will return a 404 by default. In Rails apps, Strong Routes renders `public/404.html` if it is present. If it is not, Strong Routes renders an empty response:
 
 ```
 [ 404, {}, [] ]
