@@ -20,7 +20,7 @@ module StrongRoutes
     def allowed_routes=(value)
       raise TypeError, "allowed routes must be an Enumerable" unless value.is_a?(Enumerable)
       @allowed_routes = value.to_set
-      @route_matchers = allowed_routes.map { |route| StrongRoutes::RouteMatcher.new(route) }
+      @route_matchers = allowed_routes.map { |route| StrongRoutes::Matcher.new(route) }
     end
 
     def enabled?
