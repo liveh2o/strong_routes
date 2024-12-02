@@ -24,8 +24,7 @@ module StrongRoutes
         # in after routes are loaded
         app.reload_routes!
 
-        config.strong_routes.allowed_routes ||= []
-        config.strong_routes.allowed_routes += RouteMapper.map(app.routes)
+        config.strong_routes.allowed_routes = RouteMapper.map(app.routes)
       end
     end
   end

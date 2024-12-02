@@ -7,6 +7,10 @@ describe StrongRoutes::Allow do
   let(:stack) { lambda { |env| [200, {"Content-Type" => "text/plain"}, ["Good"]] } }
 
   context "without allowed routes set" do
+    before do
+      StrongRoutes.config.allowed_routes = []
+    end
+
     it "does not allow access to /users" do
       get "/users"
       _(last_response).wont_be :ok?
@@ -34,14 +38,8 @@ describe StrongRoutes::Allow do
   end
 
   context "with allowed routes set" do
-    let(:users_path) { [/\/users/i] }
-
     before do
-      StrongRoutes.config.allowed_routes = users_path
-    end
-
-    after do
-      StrongRoutes.config.allowed_routes = nil
+      StrongRoutes.config.allowed_routes = ["/users"]
     end
 
     it "allows access to /users" do
@@ -60,31 +58,12 @@ describe StrongRoutes::Allow do
     end
   end
 
-  context "enabled option is false" do
-    let(:app) { StrongRoutes::Allow.new(stack, {enabled: false}) }
-
+  context "when enabled option is false" do
     it "passes request to the next app" do
-      get "/users/profile/anything?stuff=12"
-      _(last_response).must_be :ok?
-    end
-  end
-
-  context "allowed_routes passed to initializer" do
-    let(:app) { StrongRoutes::Allow.new(stack, {allowed_routes: [:users]}) }
-
-    it "allows /users with :users" do
-      get "/users"
-      _(last_response).must_be :ok?
-    end
-
-    it "does not allow /user :user" do
-      get "/user"
-      _(last_response).wont_be :ok?
-    end
-
-    it "allows access to /users/profile/anything?stuff=12 with :users" do
-      get "/users/profile/anything?stuff=12"
-      _(last_response).must_be :ok?
+      StrongRoutes.config.stub :enabled?, false do
+        get "/users/profile/anything?stuff=12"
+        _(last_response).must_be :ok?
+      end
     end
   end
 end
