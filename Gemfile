@@ -5,6 +5,8 @@ gemspec
 
 gem "actionpack", ">= 7.0.0"
 
+gem "benchmark-ips", "~> 2.14"
+
 gem "minitest", "~> 5.16"
 
 gem "rack-test", "~> 2.1"

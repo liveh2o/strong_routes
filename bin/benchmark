@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/setup"
+require "strong_routes"
+
+require "benchmark/ips"
+
+StrongRoutes.config.allowed_routes = [
+  "/",
+  "/bar/sandwich",
+  "/comments/:id",
+  "/comments/:id/edit",
+  "/posts/:id",
+  "/posts/:id/edit",
+  "/posts/:post_id/comments",
+  "/posts/:post_id/comments/new",
+  "/trading-post",
+  "/user_posts/:id",
+  "/users",
+  "/users/:user_id/posts",
+  "/users/:user_id/posts/new"
+]
+
+Benchmark.ips do |x|
+  app = StrongRoutes::Allow.new(lambda { |env| [200, {"content-type" => "text/plain"}, ["OK"]] })
+
+  x.report("Hit") { app.call(Rack::PATH_INFO => "/users/1") }
+  x.report("Miss") { app.call(Rack::PATH_INFO => "/baz") }
+end
