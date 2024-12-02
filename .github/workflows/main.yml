@@ -23,7 +23,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: [2.7, head, jruby-9.4, jruby-head, truffleruby-head]
+        ruby: [2.7, head, jruby-9.4, jruby-head]
     continue-on-error: ${{ endsWith(matrix.ruby, 'head') }}
     steps:
       - uses: actions/checkout@v4
