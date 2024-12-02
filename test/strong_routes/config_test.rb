@@ -16,14 +16,29 @@ describe StrongRoutes::Config do
       _(subject.respond_to?(:insert_after)).must_equal true
     end
 
+    it "supports :insert_after?" do
+      _(subject.respond_to?(:insert_after?)).must_equal true
+    end
+
     it "supports :insert_before" do
       _(subject.respond_to?(:insert_before)).must_equal true
+    end
+
+    it "supports :insert_before?" do
+      _(subject.respond_to?(:insert_before?)).must_equal true
     end
   end
 
   describe "#enabled" do
     it "is enabled by default" do
       _(subject).must_be :enabled
+    end
+  end
+
+  describe "#allowed_routes=" do
+    it "maps allowed routes to matchers" do
+      subject.allowed_routes = ["/users"]
+      _(subject.route_matchers).must_equal [StrongRoutes::RouteMatcher.new("/users")]
     end
   end
 end

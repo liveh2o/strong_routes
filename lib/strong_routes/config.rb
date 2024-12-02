@@ -1,51 +1,35 @@
 module StrongRoutes
-  module Accessorable
-    # Creates an accessor that simply sets and reads a key in the hash:
-    #
-    #   class Config < Hash
-    #     hash_accessor :app
-    #   end
-    #
-    #   config = Config.new
-    #   config.app = Foo
-    #   config[:app] #=> Foo
-    #
-    #   config[:app] = Bar
-    #   config.app #=> Bar
-    #
-    def hash_accessor(*names) # :nodoc:
-      names.each do |name|
-        class_eval <<-METHOD, __FILE__, __LINE__ + 1
-          def #{name}
-            self[:#{name}]
-          end
-
-          def #{name}=(value)
-            self[:#{name}] = value
-          end
-
-          def #{name}?
-            !! self[:#{name}]
-          end
-        METHOD
-      end
-    end
-  end
-
-  class Config < Hash
-    extend Accessorable
-
-    hash_accessor :allowed_routes,
-      :enabled,
+  class Config
+    attr_accessor :enabled,
       :insert_after,
       :insert_before,
       :message
 
-    def initialize(*)
-      super
+    attr_reader :allowed_routes, :route_matchers
 
-      self[:enabled] = true if self[:enabled].nil?
-      self[:message] = "Resource Not Found" if self[:message].nil?
+    def initialize
+      @allowed_routes = Set.new
+      @enabled = true
+      @message = "Resource Not Found"
+      @route_matchers = []
+    end
+
+    def allowed_routes=(value)
+      raise TypeError, "allowed routes must be an Enumerable" unless value.is_a?(Enumerable)
+      @allowed_routes = value.to_set
+      @route_matchers = allowed_routes.map { |route| StrongRoutes::RouteMatcher.new(route) }
+    end
+
+    def enabled?
+      !!enabled
+    end
+
+    def insert_after?
+      !!insert_after
+    end
+
+    def insert_before?
+      !!insert_before
     end
   end
 end
