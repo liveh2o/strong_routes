@@ -25,6 +25,5 @@ StrongRoutes.config.allowed_routes = [
 Benchmark.ips do |x|
   app = StrongRoutes::Allow.new(lambda { |env| [200, {"content-type" => "text/plain"}, ["OK"]] })
 
-  x.report("Hit") { app.call(Rack::PATH_INFO => "/users/1") }
-  x.report("Miss") { app.call(Rack::PATH_INFO => "/baz") }
+  x.report("Denied request") { app.call(Rack::PATH_INFO => "/baz") }
 end
