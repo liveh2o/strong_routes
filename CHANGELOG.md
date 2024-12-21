@@ -1,7 +1,31 @@
-## [Unreleased]
+All notable changes to this project will be documented in this file.
 
-- Require Ruby 2.7
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## Unreleased
+
+## [2.0.0] – 2024-12-21
+
+- Modernize the gem setup [#5](https://github.com/liveh2o/strong_routes/pull/5)
+- Make Allow middleware thread-safe without duping (85x faster!) [#6](https://github.com/liveh2o/strong_routes/pull/6)
+- Return 404 HEAD response by default (if `public/404.html` is present in Rails apps, it is rendered instead) [#7](https://github.com/liveh2o/strong_routes/pull/7)
+- Automatically reload allowed routes in Rails apps when routes change (in development mode)
 - Use Standard styles
+
+### Added
+
+- Add config options for `:content`, `:content_type`, and `:status`. If `:content` is nil (the default), no headers will be returned. Otherwise, a `content-type` header will be added. If `:content_type` is nil (the default), `"text/plain"` will be used.
+
+### Changed
+
+- Allowed routes now require a leading slash (i.e., "/") [#9](https://github.com/liveh2o/strong_routes/pull/9)
+
+### Removed
+
+- Drop support for the `:message` config option (use `:content` instead)
+- Drop support for allowing routes as symbols
+- Require Ruby 2.7
 
 ## [1.0.2] - 2016-02-09
 
