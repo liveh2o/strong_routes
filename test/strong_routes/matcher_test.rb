@@ -18,7 +18,7 @@ describe StrongRoutes::Matcher do
       subject { StrongRoutes::Matcher.new("/foo") }
 
       it "creates a new matcher" do
-        _(subject).must_equal /\A\/foo(:?\?.*)*$/i
+        _(subject).must_equal(/\A\/foo(:?\?.*)*$/i)
       end
     end
 
@@ -28,7 +28,7 @@ describe StrongRoutes::Matcher do
       subject { StrongRoutes::Matcher.new("/:id/foo/:foo_id/bar") }
 
       it "creates a new matcher" do
-        _(subject).must_equal /\A\/.*\/foo\/.*\/bar(:?\?.*)*$/i
+        _(subject).must_equal(/\A\/.*\/foo\/.*\/bar(:?\?.*)*$/i)
       end
     end
   end
