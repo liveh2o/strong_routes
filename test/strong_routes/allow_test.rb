@@ -39,7 +39,7 @@ describe StrongRoutes::Allow do
 
   context "with allowed routes set" do
     before do
-      StrongRoutes.config.allowed_routes = ["/users"]
+      StrongRoutes.config.allowed_routes = ["/users", "/users/profile/anything"]
     end
 
     it "allows access to /users" do
@@ -48,7 +48,12 @@ describe StrongRoutes::Allow do
     end
 
     it "allows access to /users?stuff=12" do
-      get "/users/?stuff=12"
+      get "/users?stuff=12"
+      _(last_response).must_be :ok?
+    end
+
+    it "allows access to /users/profile/anything?stuff=12" do
+      get "/users/profile/anything?stuff=12"
       _(last_response).must_be :ok?
     end
 
@@ -56,10 +61,16 @@ describe StrongRoutes::Allow do
       get "/user"
       _(last_response).wont_be :ok?
     end
+  end
 
-    it "allows access to /users/profile/anything?stuff=12" do
-      get "/users/profile/anything?stuff=12"
-      _(last_response).must_be :ok?
+  context "with root route set" do
+    before do
+      StrongRoutes.config.allowed_routes = ["/"]
+    end
+
+    it "does not allow access to /users" do
+      get "/users"
+      _(last_response).wont_be :ok?
     end
   end
 
