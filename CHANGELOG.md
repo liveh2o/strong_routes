@@ -5,6 +5,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [2.0.1] – 2025-06-02
+
+- Prevent root path from matching all routes [#11](https://github.com/liveh2o/strong_routes/pull/11) / [@WriterZephos](https://github.com/WriterZephos)
+
 ## [2.0.0] – 2024-12-21
 
 - Modernize the gem setup [#5](https://github.com/liveh2o/strong_routes/pull/5)
